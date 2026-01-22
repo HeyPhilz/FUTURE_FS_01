@@ -1,0 +1,204 @@
+// ============================================
+// PROJECT DATA - STORED LOCALLY IN JAVASCRIPT
+// ============================================
+
+const projectsData = [
+    {
+        id: 4,
+        title: "MeetMe",
+        description: "A stunning portfolio website showcasing projects, skills, and work experience with smooth animations.",
+        image: "<img src='Image.png' alt='Image' style='max-width: 100%; height: auto;'>",
+        technologies: ["HTML", "CSS", "JavaScript", "Animations"],
+        details: "Designed and developed a creative portfolio website with smooth scrolling, lightweight animated sections, and responsive layout. The site includes project showcase with the status of said projects, skills section, and contact.",
+        link: "#",
+        status: "Completed"
+    },
+    {
+        id: 1,
+        title: "E-Commerce Platform",
+        description: "Yet to be added.",
+        image: "?",
+        technologies: ["HTML", "CSS", "JavaScript", "React"],
+        details: "Yet to be added.",
+        link: "#",
+        status: "In Drafts"
+    },
+    {
+        id: 3,
+        title: "FocusFlow",
+        description: "FocusFlow allows you to log in your daily taks and be productive in a gamefied way.",
+        image: "<img src='Logo.svg' alt='FocusFlow' style='max-width: 100%; height: auto;'>",
+        technologies: ["React","HTML", "Node.js", "MongoDB", "JavaScript", "Github", "TailWind CSS"],
+        details: "Developed a Time-blocking, task management app with drag-and-drop functionality, and MongoDB data storage for data persistence. Includes task filtering",
+        link: "https://github.com/sxhilow/FocusFlow",
+        status: "Completed"
+    }
+];
+
+// ============================================
+// FUNCTION TO LOAD PROJECTS
+// ============================================
+
+function loadProjects() {
+    const projectsGrid = document.getElementById('projectsGrid');
+    projectsGrid.innerHTML = '';
+
+    projectsData.forEach(project => {
+        const projectCard = document.createElement('div');
+        projectCard.className = 'project-card';
+        const statusClass = project.status === 'Completed' ? 'status-completed' : 'status-in-progress';
+        projectCard.innerHTML = `
+            <div class="project-image">${project.image}</div>
+            <div class="project-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <h3 class="project-title">${project.title}</h3>
+                    <span class="project-status ${statusClass}">${project.status}</span>
+                </div>
+                <p class="project-description">${project.description}</p>
+                <div class="project-tech">
+                    ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                </div>
+                <button class="project-button" onclick="openModal(${project.id})">View Details</button>
+            </div>
+        `;
+        projectsGrid.appendChild(projectCard);
+    });
+}
+
+// ============================================
+// MODAL FUNCTIONS
+// ============================================
+
+function openModal(projectId) {
+    const project = projectsData.find(p => p.id === projectId);
+    if (project) {
+        const modalBody = document.getElementById('modalBody');
+        modalBody.innerHTML = `
+            <h2 style="margin-bottom: 1rem; color: #333;">${project.title}</h2>
+            <div style="font-size: 4rem; margin-bottom: 1rem; text-align: center;">${project.image}</div>
+            <p style="color: #555; line-height: 1.8; margin-bottom: 1.5rem;">${project.details}</p>
+            <div style="margin-bottom: 1.5rem;">
+                <h4 style="margin-bottom: 0.8rem; color: #333;">Technologies Used:</h4>
+                <div class="project-tech">
+                    ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                </div>
+            </div>
+            <a href="${project.link}" class="project-button" style="display: inline-block; text-decoration: none;">Visit Project</a>
+        `;
+        document.getElementById('projectModal').style.display = 'block';
+    }
+}
+
+function closeModal() {
+    document.getElementById('projectModal').style.display = 'none';
+}
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('projectModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// ============================================
+// FUNCTION TO GET PROJECTS FROM LOCAL STORAGE
+// ============================================
+
+function saveProjectsToLocalStorage() {
+    localStorage.setItem('meetMeProjects', JSON.stringify(projectsData));
+}
+
+function getProjectsFromLocalStorage() {
+    const stored = localStorage.getItem('meetMeProjects');
+    if (stored) {
+        return JSON.parse(stored);
+    }
+    return projectsData;
+}
+
+// ============================================
+// INITIALIZE ON PAGE LOAD
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Save projects to local storage
+    saveProjectsToLocalStorage();
+    
+    // Load and display projects
+    loadProjects();
+    
+    // Smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    console.log('MeetMe Portfolio loaded successfully!');
+    console.log('Stored projects:', getProjectsFromLocalStorage());
+});
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+
+// Function to add new projects to local storage
+function addProjectToLocalStorage(newProject) {
+    const projects = getProjectsFromLocalStorage();
+    const maxId = Math.max(...projects.map(p => p.id), 0);
+    newProject.id = maxId + 1;
+    projects.push(newProject);
+    localStorage.setItem('meetMeProjects', JSON.stringify(projects));
+    return newProject;
+}
+
+// Function to update a project in local storage
+function updateProjectInLocalStorage(projectId, updatedProject) {
+    const projects = getProjectsFromLocalStorage();
+    const index = projects.findIndex(p => p.id === projectId);
+    if (index !== -1) {
+        projects[index] = { ...projects[index], ...updatedProject };
+        localStorage.setItem('meetMeProjects', JSON.stringify(projects));
+        return projects[index];
+    }
+    return null;
+}
+
+// Function to delete a project from local storage
+function deleteProjectFromLocalStorage(projectId) {
+    const projects = getProjectsFromLocalStorage();
+    const filtered = projects.filter(p => p.id !== projectId);
+    localStorage.setItem('meetMeProjects', JSON.stringify(filtered));
+    return true;
+}
+deleteProjectFromLocalStorage(1);
+
+// Example: How to use the functions
+/*
+// Add a new project
+const newProject = {
+    title: "New Project",
+    description: "Project description",
+    image: "🎨",
+    technologies: ["HTML", "CSS"],
+    details: "Detailed description of the project",
+    link: "#"
+};
+addProjectToLocalStorage(newProject);
+
+// Update a project
+updateProjectInLocalStorage(1, { title: "Updated Title" });
+
+// Delete a project
+deleteProjectFromLocalStorage(1);
+
+// Get all projects
+console.log(getProjectsFromLocalStorage());
+*/
