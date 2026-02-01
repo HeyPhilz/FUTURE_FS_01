@@ -20,7 +20,7 @@ const projectsData = [
         image: "?",
         technologies: ["HTML", "CSS", "JavaScript", "React"],
         details: "Yet to be added.",
-        link: "#",
+        link: "https://github.com/HeyPhilz/FUTURE_FS_02",
         status: "In Drafts"
     },
     {
