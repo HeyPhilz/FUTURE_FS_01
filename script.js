@@ -10,7 +10,7 @@ const projectsData = [
         image: "<img src='image.png' alt='Image' style='max-width: 100%; height: auto;'>",
         technologies: ["HTML", "CSS", "JavaScript", "Animations", "Github"],
         details: "Designed and developed a creative portfolio website with smooth scrolling, lightweight animated sections, and responsive layout. The site includes project showcase with the status of said projects, skills section, and contact.",
-        link: "#",
+        link: "https://heyphilz.github.io/FUTURE_FS_01/",
         status: "Completed"
     },
     {
