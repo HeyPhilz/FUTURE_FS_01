@@ -18,6 +18,7 @@
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </div>
@@ -27,7 +28,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="hero-title">Ello, My name is Freedom Philani Nxumalo.</h1>
-            <p class="hero-subtitle">I'm merrily committed to developing creative yet functional web experiences that are easily scalable.</p>
+            <p class="hero-subtitle">I'm merrily committed to developing  creative yet functional web experiences that are easily scalable.</p>
             <button class="cta-button" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
                 View My Work
             </button>
@@ -49,8 +50,13 @@
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <p>I'm a Freelancing web developer with adequate experience in creating responsive, user-friendly websites, web applications as well as mobileapplications. I enjoy working with modern technologies and turning ideas into reality.</p>
-                <div class="skills">
+                <div class="developer-image-placeholder"><img src="devimage.jpg" alt="Developer Image" class="developer-image-placeholder"></div>
+                <p>
+                    I'm a Freelancing web developer with adequate experience in creating responsive, user-friendly websites, web applications as well as mobile applications. 
+                    I enjoy working with modern technologies and turning ideas into reality.
+                </p>
+            
+                    <div class="skills">
                     <h3>Skills</h3>
                     <div class="skills-grid">
                         <div class="skill-tag">HTML</div>
@@ -63,17 +69,34 @@
                         <div class="skill-tag">Digital Art</div>
                         <div class="skill-tag">Effective Communication</div>
                         <div class="skill-tag">React</div>
-                        <div class="skill-tag">MariaDb</div>
-                        <div class="skill-tag">MySql</div>
+                        <div class="skill-tag">MariaDB</div>
+                        <div class="skill-tag">UI/UX Design</div>
+                        <div class="skill-tag">MySQL</div>
                         <div class="skill-tag">Responsive Design</div>
-                        <div class="skill-tag">Web Performance</div>
+                        <div class="skill-tag">Web Performance Tuning</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
- 
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications-section">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certifications-spinner">
+                <button class="spinner-button spinner-prev" onclick="prevCertification()">❮</button>
+                <div class="spinner-display" id="spinnerDisplay">
+                    <!-- Current certification will be displayed here -->
+                </div>
+                <button class="spinner-button spinner-next" onclick="nextCertification()">❯</button>
+            </div>
+            <div class="spinner-dots" id="spinnerDots">
+                <!-- Dots will be generated here -->
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
@@ -89,7 +112,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2026 MeetMe. All rights reserved. yass.</p>
+        <p>&copy; 2026 MeetMe. All rights reserved.</p>
     </footer>
 
     <!-- Modal for Project Details -->

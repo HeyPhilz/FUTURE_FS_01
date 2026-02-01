@@ -8,7 +8,7 @@ const projectsData = [
         title: "MeetMe",
         description: "A stunning portfolio website showcasing projects, skills, and work experience with smooth animations.",
         image: "<img src='Image.png' alt='Image' style='max-width: 100%; height: auto;'>",
-        technologies: ["HTML", "CSS", "JavaScript", "Animations"],
+        technologies: ["HTML", "CSS", "JavaScript", "Animations", "Github"],
         details: "Designed and developed a creative portfolio website with smooth scrolling, lightweight animated sections, and responsive layout. The site includes project showcase with the status of said projects, skills section, and contact.",
         link: "#",
         status: "Completed"
@@ -32,6 +32,39 @@ const projectsData = [
         details: "Developed a Time-blocking, task management app with drag-and-drop functionality, and MongoDB data storage for data persistence. Includes task filtering",
         link: "https://github.com/sxhilow/FocusFlow",
         status: "Completed"
+    },
+    {
+        id: 5,
+        title: "SPCL-hub",
+        description: "Yet to be added, View Details",
+        image: "?",
+        technologies: ["Android Studio", "Java", "XML", "Ibis Paint X", "GitHub", "Krita","Capcut"],
+        details: "It's Mobile app for SPCL Squadmates to connect, share and review eachother's gameplay videos, discuss strategies, and plan gaming sessions together.",
+        link: "https://github.com/HeyPhilz/SPCLDreamTeam",
+        status: "In Drafts"
+    }
+];
+
+// ============================================
+// CERTIFICATIONS DATA - STORED LOCALLY IN JAVASCRIPT
+// ============================================
+
+const certificationsData = [
+    {
+        id: 1,
+        title: "Artificial Intelligence Fundamentals",
+        issuer: "IBM",
+        date: "29 March 2025",
+        icon: "<img src='ibm.png' alt='IBM' style='max-width: 100%; height: auto;'>",
+        description: "Comprehensive introduction to AI concepts, machine learning algorithms"
+    },
+    {
+        id: 2,
+        title: "Artificial Intelligence Fundamentals with Capstone Project",
+        issuer: "IBM",
+        date: "29 March 2025",
+        icon: "<img src='ibm.png' alt='IBM' style='max-width: 100%; height: auto;'>",
+        description: "Comprehensive introduction to AI concepts, machine learning algorithms, and practical capstone project implementation."
     }
 ];
 
@@ -102,6 +135,75 @@ window.onclick = function(event) {
 }
 
 // ============================================
+// CERTIFICATIONS SPINNER VARIABLES
+// ============================================
+
+let currentCertificationIndex = 0;
+
+// ============================================
+// FUNCTION TO LOAD CERTIFICATIONS SPINNER
+// ============================================
+
+function loadCertificationsSpinner() {
+    displayCertification(currentCertificationIndex);
+    createDots();
+}
+
+function displayCertification(index) {
+    const spinnerDisplay = document.getElementById('spinnerDisplay');
+    const cert = certificationsData[index];
+    
+    spinnerDisplay.innerHTML = `
+        <div class="certification-icon">${cert.icon}</div>
+        <h3 class="certification-title">${cert.title}</h3>
+        <p class="certification-issuer">${cert.issuer}</p>
+        <p class="certification-date">${cert.date}</p>
+        <p class="certification-description">${cert.description}</p>
+    `;
+    
+    updateDots();
+}
+
+function nextCertification() {
+    currentCertificationIndex = (currentCertificationIndex + 1) % certificationsData.length;
+    displayCertification(currentCertificationIndex);
+}
+
+function prevCertification() {
+    currentCertificationIndex = (currentCertificationIndex - 1 + certificationsData.length) % certificationsData.length;
+    displayCertification(currentCertificationIndex);
+}
+
+function createDots() {
+    const spinnerDots = document.getElementById('spinnerDots');
+    spinnerDots.innerHTML = '';
+    
+    certificationsData.forEach((cert, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'spinner-dot';
+        if (index === currentCertificationIndex) {
+            dot.classList.add('active');
+        }
+        dot.onclick = () => {
+            currentCertificationIndex = index;
+            displayCertification(currentCertificationIndex);
+        };
+        spinnerDots.appendChild(dot);
+    });
+}
+
+function updateDots() {
+    const dots = document.querySelectorAll('.spinner-dot');
+    dots.forEach((dot, index) => {
+        if (index === currentCertificationIndex) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
+
+// ============================================
 // FUNCTION TO GET PROJECTS FROM LOCAL STORAGE
 // ============================================
 
@@ -127,6 +229,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load and display projects
     loadProjects();
+    
+    // Load and display certifications spinner
+    loadCertificationsSpinner();
     
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('a[href^="#"]');
