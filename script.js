@@ -27,7 +27,7 @@ const projectsData = [
         id: 2,
         title: "LeadFlow CRM",
         description: "A secure web app, designed to aid track Leads on customers",
-        image: "<img src='image.png' alt='Image' style='max-width: 100%; height: auto;'>",
+        image: "💼",
         technologies: ["HTML", "CSS", "JavaScript", "React", "Krita", "Nodejs", "Mongodb", "Github"],
         details: "A CRM (Customer Relationship Management) offering centralized platform that helps businesses manage interactions with current and potential customers, store contact information, and automate sales and marketing tasks through a web browser",
         link: "https://heyphilz.github.io/FUTURE_FS_02/",
