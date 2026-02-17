@@ -75,6 +75,14 @@ const certificationsData = [
         date: "29 March 2025",
         icon: "<img src='ibm.png' alt='IBM' style='max-width: 100%; height: auto;'>",
         description: "Comprehensive introduction to AI concepts, machine learning algorithms, and practical capstone project implementation."
+    },
+    {
+        id: 3,
+        title: "Full Stack Web Development",
+        issuer: "Future Interns",
+        date: "16 February 2026",
+        icon: "<img src='Futureinternslogo.png' alt='Future Interns' style='max-width: 100%; height: auto;'>",
+        description: "A month long remote internship."
     }
 ];
 
